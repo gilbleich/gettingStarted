@@ -1,7 +1,4 @@
 # Continuous Delivery Director
+and adding stuff here
 Use this sample application when creating a simple release following the CDDirector Getting Started tutorial.
-Change 1 - no message
-Change 2
-change 3
-change 4
-change 5
+begin fresh
