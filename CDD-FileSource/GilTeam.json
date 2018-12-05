@@ -1,7 +1,6 @@
 {
 "parameters": [
     {
-
       "name": "releaseVersion",
 
       "value": "2.1"
