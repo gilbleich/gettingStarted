@@ -1,0 +1,36 @@
+{
+"parameters": [
+    {
+      "name": "homePageVersion",
+
+      "value": "3.3"
+
+    },
+	{
+      "name": "plantsServerVersion",
+
+      "value": "2.5"
+    },
+	{
+      "name": "adsVersion",
+
+      "value": "1.7"
+
+    },
+	{
+      "name": "simulatorVersion",
+
+      "value": "2.2"
+    },
+	{
+      "name": "sprint",
+
+      "value": "2"
+    }
+  ], 
+ "reference": {
+
+    "fileName": "GardenPipeline.json",
+	"fileSource": "GardenPipelineReference"
+  }
+}
