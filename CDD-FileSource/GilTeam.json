@@ -1,0 +1,20 @@
+{
+"parameters": [
+    {
+      "name": "releaseVersion",
+
+      "value": "2.1"
+
+    },
+	{
+      "name": "plantsserverVersion",
+
+      "value": "2.3"
+    }
+  ], 
+ "reference": {
+
+    "fileName": "GilPipeline.json",
+	"fileSource": "GilPipelineReference"
+  }
+}
