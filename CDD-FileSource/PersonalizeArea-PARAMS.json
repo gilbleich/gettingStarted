@@ -1,0 +1,25 @@
+{
+"parameters": [
+    {
+      "name": "ExpensesCalcVersion",
+
+      "value": "1.1"
+
+    },
+	{
+      "name": "PersonalArea-UIVersion",
+
+      "value": "1.5"
+    },
+	{
+      "name": "sprint",
+
+      "value": "sprint-3"
+    }
+  ], 
+ "reference": {
+
+    "fileName": "Personalize-Team_PIPELINE.json",
+	"fileSource": "GardenPipelineReference"
+  }
+}
