@@ -20,6 +20,6 @@
  "reference": {
 
     "fileName": "Personalize-Team_PIPELINE.json",
-	"fileSource": "GardenPipelineReference"
+	"fileSource": "import_PersonalArea"
   }
 }
