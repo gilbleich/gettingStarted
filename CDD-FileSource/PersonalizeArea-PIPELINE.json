@@ -1,0 +1,209 @@
+{
+	"objects": [{
+		"application": "Local|ExpensesCalc",
+		"name": "${ExpensesCalcVersion}",
+		"kind": "ApplicationVersion"
+	},
+	{
+		"application": "Local|PersonalArea-UI",
+		"name": "${PersonalArea-UIVersion}",
+		"kind": "ApplicationVersion"
+	},
+	{
+		"applicationVersion": "Local|PersonalArea-UI/${PersonalArea-UIVersion}",
+		"name": "sprint-2",
+		"kind": "ContentSource",
+		"plugin": "Rally Platform/2.3",
+		"endpoint": "agileCentral",
+		"type": "Add Content",
+		"parameters": {
+			"release": "CDD7.0",
+			"project": "Continuous Delivery Director",
+			"iteration": "CDD Iteration 4",
+			"type": "User Story,Defect",
+			"tags": ""
+		}
+	},
+	{
+		"applicationVersion": "Local|PersonalArea-UI/${PersonalArea-UIVersion}",
+		"commitRegularExpression": "^[ \\\\t]*([A-Za-z0-9_]+)",
+		"name": "1.0_commitSource",
+		"kind": "CommitSource",
+		"plugin": "GitHub/1.0.1",
+		"endpoint": "github",
+		"type": "Get Commit Messages",
+		"parameters": {
+			"owner": "gilbleich",
+			"repository": "gettingStarted"
+		}
+	},
+	{
+		"applicationVersions": ["Local|ExpensesCalc/${ExpensesCalcVersion}",
+		"Local|PersonalArea-UI/${PersonalArea-UIVersion}"],
+		"ownerParties": ["superuser@ca.com"],
+		"runOnCreation": false,
+		"version": "${sprint}",
+		"name": "Personalize-Team",
+		"kind": "Release"
+	},
+	{
+		"skipTasksWithUnchangedApplications": false,
+		"approvalGate": "AUTOMATIC",
+		"release": "Personalize-Team/sprint-2",
+		"environments": ["Acceptance"],
+		"isApprovalRequired": false,
+		"name": "Acceptance",
+		"kind": "Phase"
+	},
+	{
+		"skipTasksWithUnchangedApplications": false,
+		"approvalGate": "AUTOMATIC",
+		"release": "Personalize-Team/sprint-2",
+		"environments": ["Integration"],
+		"previousPhase": "Acceptance",
+		"isApprovalRequired": false,
+		"name": "Integration",
+		"kind": "Phase"
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Acceptance",
+		"isDisabled": false,
+		"applicationVersions": ["Local|ExpensesCalc/${ExpensesCalcVersion}"],
+		"name": "Deploy ExpensesCalc",
+		"kind": "Task",
+		"plugin": "TestTask/1.0",
+		"endpoint": "test",
+		"type": "Run Test",
+		"parameters": {
+			"result-build-number": "%ExpensesCalc.last_successful_change%",
+			"detailed-status": "Running",
+			"shall-fail": "false",
+			"number-iterations": "1",
+			"status": "Running"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Acceptance",
+		"isDisabled": false,
+		"applicationVersions": ["Local|PersonalArea-UI/${PersonalArea-UIVersion}"],
+		"name": "Deploy Peronal-UI",
+		"kind": "Task",
+		"plugin": "TestTask/1.0",
+		"endpoint": "test",
+		"type": "Run Test",
+		"parameters": {
+			"result-build-number": "%PersonalArea-UI.last_successful_change%",
+			"detailed-status": "Running",
+			"shall-fail": "false",
+			"number-iterations": "1",
+			"status": "Running"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Acceptance",
+		"isDisabled": false,
+		"previousTasks": ["Deploy ExpensesCalc",
+		"Deploy Peronal-UI"],
+		"name": "Expose App URL",
+		"kind": "Task",
+		"plugin": "REST/2.2",
+		"endpoint": "rest",
+		"type": "REST",
+		"parameters": {
+			"method": "GET",
+			"statusCheck": "false"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Acceptance",
+		"isDisabled": false,
+		"applicationVersions": ["Local|PersonalArea-UI/${PersonalArea-UIVersion}"],
+		"tags": ["Acceptance"],
+		"previousTasks": ["Expose App URL"],
+		"name": "Test PersonalArea",
+		"kind": "Task",
+		"plugin": "ADAPTIVE TESTING/1.0.2",
+		"type": "Run Adaptive Testing",
+		"parameters": {
+			"changeId": "%PersonalArea-UI.last_successful_change%"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Integration",
+		"isDisabled": false,
+		"applicationVersions": ["Local|ExpensesCalc/${ExpensesCalcVersion}"],
+		"name": "Deploy ExpensesCalc",
+		"kind": "Task",
+		"plugin": "TestTask/1.0",
+		"endpoint": "test",
+		"type": "Run Test",
+		"parameters": {
+			"result-build-number": "%ExpensesCalc.last_successful_change%",
+			"detailed-status": "Running",
+			"shall-fail": "false",
+			"number-iterations": "1",
+			"status": "Running"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Integration",
+		"isDisabled": false,
+		"applicationVersions": ["Local|PersonalArea-UI/${PersonalArea-UIVersion}"],
+		"name": "Deploy Peronal-UI",
+		"kind": "Task",
+		"plugin": "TestTask/1.0",
+		"endpoint": "test",
+		"type": "Run Test",
+		"parameters": {
+			"result-build-number": "%PersonalArea-UI.last_successful_change%",
+			"detailed-status": "Running",
+			"shall-fail": "false",
+			"number-iterations": "1",
+			"status": "Running"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Integration",
+		"isDisabled": false,
+		"previousTasks": ["Deploy ExpensesCalc",
+		"Deploy Peronal-UI"],
+		"name": "Expose App URL",
+		"kind": "Task",
+		"plugin": "REST/2.2",
+		"endpoint": "rest",
+		"type": "REST",
+		"parameters": {
+			"method": "GET",
+			"statusCheck": "false"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Integration",
+		"isDisabled": false,
+		"applicationVersions": ["Local|PersonalArea-UI/${PersonalArea-UIVersion}"],
+		"tags": ["Acceptance"],
+		"previousTasks": ["Expose App URL"],
+		"name": "Test PersonalArea",
+		"kind": "Task",
+		"plugin": "ADAPTIVE TESTING/1.0.2",
+		"type": "Run Adaptive Testing",
+		"parameters": {
+			"changeId": "%PersonalArea-UI.last_successful_change%"
+		}
+	},
+	{
+		"phase": "Personalize-Team/sprint-2/Integration",
+		"isDisabled": false,
+		"previousTasks": ["Test PersonalArea"],
+		"name": "Notify prod team",
+		"kind": "Task",
+		"plugin": "Slack/1.0",
+		"endpoint": "slack",
+		"type": "Post message",
+		"parameters": {
+			"channel": "",
+			"message": "Finished Integration run. \nExpensesCalc:%ExpensesCalc.last_successful_change%\nPersonalArea:%PersonalArea-UI.last_successful_change%",
+			"username": "CDDirector"
+		}
+	}]
+}
