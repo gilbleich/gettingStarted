@@ -1,0 +1,37 @@
+{
+"parameters": [
+    {
+      "name": "Reporting_applicationVersion",
+
+      "value": "1.1"
+
+    },
+	{
+      "name": "Web_applicationVersion",
+
+      "value": "1.1"
+    },
+	{
+      "name": "Mobile_applicationVersion",
+
+      "value": "1.7"
+
+    },
+	{
+      "name": "sprint",
+
+      "value": "2"
+
+    },
+	{
+      "name": "Release_Version",
+
+      "value": "2"
+    }
+  ], 
+ "reference": {
+
+   "fileName": "ReportingPipeline.json",
+	 "fileSource": "Reporting-Release"
+  }
+}
